@@ -46,7 +46,7 @@ class _SignUpPageState extends State<SignUpPage> {
               },
               builder: (context, state) {
                 if (state is AuthLoading) {
-                  return const Loader();
+                  return const Loader(text: "Signung up ...",);
                 }
                 return Form(
                   key: formKey,

@@ -1,4 +1,6 @@
+import 'package:blog_app/core/common/widgets/loader.dart';
 import 'package:blog_app/core/theme/app_pallete.dart';
+import 'package:blog_app/core/utils/show_snackbar.dart';
 import 'package:blog_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:blog_app/features/auth/presentation/pages/signup_page.dart';
 import 'package:blog_app/features/auth/presentation/widgets/auth_field.dart';
@@ -35,9 +37,14 @@ class _LoginPageState extends State<LoginPage> {
           child: SingleChildScrollView(
             child: BlocConsumer<AuthBloc, AuthState>(
               listener: (context, state) {
-                // TODO: implement listener
+                if (state is AuthFailure) {
+                  showSnackBar(context, state.message);
+                }
               },
               builder: (context, state) {
+                if (state is AuthLoading) {
+                  return const Loader(text: 'Logging in ...');
+                }
                 return Form(
                   key: formKey,
                   child: Column(
@@ -62,7 +69,14 @@ class _LoginPageState extends State<LoginPage> {
                       AuthGradientButton(
                         buttonText: 'Sign in',
                         onPressed: () {
-                          if (formKey.currentState!.validate()) {}
+                          if (formKey.currentState!.validate()) {
+                            context.read<AuthBloc>().add(
+                              AuthLogin(
+                                email: emailController.text.trim(),
+                                password: passwordController.text.trim(),
+                              ),
+                            );
+                          }
                         },
                       ),
                       const SizedBox(height: 20),
