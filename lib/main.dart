@@ -42,6 +42,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Blog App',
       theme: AppTheme.darkThemeMode,
       home: BlocSelector<AppUserCubit, AppUserState, bool>(
