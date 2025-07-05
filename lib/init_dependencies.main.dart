@@ -6,8 +6,8 @@ Future<void> initDependencies() async {
   _initAuth();
   _initBlog();
   final supabase = await Supabase.initialize(
-    url: AppSecrets.supabaseUrl,
-    anonKey: AppSecrets.supabaseAnonKey,
+    url: AppSecretsLocal.supabaseUrl,
+    anonKey: AppSecretsLocal.supabaseAnonKey,
   );
 
   Hive.defaultDirectory = (await getApplicationDocumentsDirectory()).path;
