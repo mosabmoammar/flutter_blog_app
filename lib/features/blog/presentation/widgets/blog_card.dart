@@ -48,6 +48,8 @@ class BlogCard extends StatelessWidget {
                     fontSize: 22.0,
                     fontWeight: FontWeight.bold,
                   ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),
